@@ -1,0 +1,19 @@
+{
+    "name": "Idownload",
+    "alias": "idownload",
+    "description": "",
+    "keywords": [],
+    "version": "1.0.0",
+	"active": 1,
+    "order": 1,
+    "providers": [
+        "Modules\\Idownload\\Providers\\IdownloadServiceProvider",
+        "Modules\\Idownload\\Providers\\RouteServiceProvider",
+        "Modules\\Idownload\\Providers\\EventServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+
+    ],
+    "requires": []
+}
