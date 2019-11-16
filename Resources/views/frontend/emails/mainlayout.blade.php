@@ -154,7 +154,9 @@
     </style>
 
 </head>
-
+@php
+    $logo = setting('isite::logo1');
+@endphp
 <body>
 <div id="body">
     <div id="template-mail">
@@ -167,7 +169,7 @@
                 </div>
             </div>
             <div class="header-contend text-center py-3">
-                <img src="{{Theme::url('img/logo.png')}}" alt="" style="max-width: 150px">
+                <img src="{{ $logo }}" alt="" style="max-width: 150px">
             </div>
 
         </header>
@@ -176,7 +178,7 @@
 
         <footer class="p-3 text-center">
             <div class="text-center">
-                <img src="{{Theme::url('img/logo.png')}}" alt="" style="max-width: 150px">
+                <img src="{{ $logo }}" alt="" style="max-width: 150px">
 
             </div>
 

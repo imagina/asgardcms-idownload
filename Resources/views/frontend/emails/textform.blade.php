@@ -6,7 +6,6 @@
 
 {{ $form->title }}
 
-@foreach($data->values as $index => $field)
-    {{ $index }}:{{ $field }}
-
+@foreach($data as $index => $field)
+    {{ trans('idownload::suscriptors.mail.'.$index) }} :{{ $field }}
 @endforeach

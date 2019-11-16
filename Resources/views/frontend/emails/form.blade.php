@@ -1,9 +1,9 @@
-@extends(View::exists('email.plantilla')?'email.plantilla':'iforms::frontend.emails.mainlayout')
+@extends('idownload::frontend.emails.mainlayout')
 @php
-$form=$lead['form'];
-$data=$lead['lead'];
+  $form=$lead['form'];
+  $data=$lead['lead'];
 
-  @endphp
+@endphp
 
 
 @section('content')
@@ -11,8 +11,8 @@ $data=$lead['lead'];
     <h1>{{ $form->title }}</h1>
     <br>
     <div style="margin-bottom: 5px">
-      @foreach($data->values as $index => $field)
-        <p class="px-3"><strong>{{ $index }}:</strong> {{ $field }} </p>
+      @foreach($data as $index => $field)
+        <p class="px-3"><strong>{{ trans('idownload::suscriptors.mail.'.$index) }}:</strong> {!! $field !!} </p>
       @endforeach
     </div>
   </div>
