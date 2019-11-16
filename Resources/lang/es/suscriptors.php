@@ -30,6 +30,13 @@ return [
       'slug' => 'Slug',
       'download' => 'Descarga',
     ],
+    'mail' => [
+      'full_name' => 'Nombre Completo',
+      'email' => 'E-mail',
+      'phone' => 'Teléfono',
+      'comment' => 'Commentario',
+      'download' => 'Archivo',
+    ],
     'messages' => [
     ],
     'validation' => [

@@ -13,6 +13,7 @@ return [
     'button' => [
         'create download' => 'Create a download',
         'download' => 'Subscribe to download',
+        'download_link' => 'Click to download File',
     ],
     'table' => [
       'id' => 'Id.',

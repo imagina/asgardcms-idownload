@@ -9,10 +9,12 @@ return [
         'downloads' => 'Descargas',
         'create download' => 'Crear una Descarga',
         'edit download' => 'Editar una Descarga',
+        'subscribe' => 'Suscríbete para recibir información sobre este archivo',
     ],
     'button' => [
         'create download' => 'Crear una Descarga',
         'download' => 'Subscríbete para descargar',
+        'download_link' => 'Click para descargar archivo',
     ],
     'table' => [
       'id' => 'Id.',
