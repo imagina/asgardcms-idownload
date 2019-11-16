@@ -89,34 +89,37 @@ class PublicController extends BasePublicController
 
     public function sendSubscription(Download $download, Request $request)
     {
-      $data = $request->all();
-      $data['donwload_id'] = $download->id;
-      $data['download'] = $download;
-      $locale = app()->getLocale();
+      try {
+        $data = $request->all();
+        $data['download_id'] = $download->id;
+        $data['download'] = $download;
+        $locale = app()->getLocale();
 
-      $tpl = "idownload::frontend.show";
-      $ttpl = "idonwload.show";
+        $tpl = "idownload::frontend.show";
+        $ttpl = "idonwload.show";
 
-      \Log::info($data);
-
-      if (setting('iforms::captcha')=="1") {
-        $validator = \Validator::make($data, [
-          'g-recaptcha-response' => 'required|captcha',
-          'full_name' => 'required',
-          'email' => 'required|email',
-        ]);
-        if ($validator->fails()) {
-          return redirect()->route(
-            $locale.'.idownload.download',
-            ['categorySlug'=>$download->category->slug,'download'=>$download->id]
-          )->withWarning(trans('idownload::idownloads.messages.captcha_required'));
+        if (setting('iforms::captcha') == "1") {
+          $validator = \Validator::make($data, [
+            'g-recaptcha-response' => 'required|captcha',
+            'full_name' => 'required',
+            'email' => 'required|email',
+          ]);
+          if ($validator->fails()) {
+            return redirect()->route(
+              $locale . '.idownload.download',
+              ['categorySlug' => $download->category->slug, 'downloadSlug' => $download->slug]
+            )->withWarning(trans('idownload::idownloads.messages.captcha_required'));
+          }
         }
+        $this->suscriptor->create($data);
+        if (view()->exists($ttpl)) $tpl = $ttpl;
+        return redirect()->route(
+          $locale . '.idownload.download',
+          ['categorySlug' => $download->category->slug, 'downloadSlug' => $download->slug]
+        )->withSuccess(trans('idownload::idownloads.messages.subscription_successful'));
+      }catch(Exception $e){
+        \log::info($e->getMessage());
+        return redirect()->back()->withErrors([trans('idownload::idownloads.messages.subscription_send_error',['error'=>$e->getMessage()])]);
       }
-      $this->suscriptor->create($data);
-      if (view()->exists($ttpl)) $tpl = $ttpl;
-      return redirect()->route(
-        $locale.'.idownload.download',
-        ['categorySlug'=>$download->category->slug,'download'=>$download->id]
-      )->withSuccess(trans('idownload::idownloads.messages.subscription_successful'));
     }
 }
