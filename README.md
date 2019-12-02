@@ -1,3 +1,6 @@
-# asgardcms-idownload
+# asgardcms-idownload v1.0.0
 
-install: composer require imagina/idownload
+##Installation
+
+`composer require imagina/idownload`
+

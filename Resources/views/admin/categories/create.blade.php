@@ -15,7 +15,7 @@
     {!! Form::open(['route' => ['admin.idownload.category.store'], 'method' => 'post']) !!}
     <div class="row">
         <div class="col-xs-12 col-md-9">
-            <div class="box box-primary">
+            <div class="nav-tabs-custom">
                 @include('partials.form-tab-headers')
                 <div class="tab-content">
                     <?php $i = 0; ?>
@@ -32,6 +32,34 @@
                     </div>
                 </div>
             </div> {{-- end nav-tabs-custom --}}
+        </div>
+        <div class="col-xs-12 col-md-3">
+            <div class="col-xs-12 ">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label>{{trans('idownload::categories.title.categories')}}</label>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <select class="form-control" name="parent_id">
+                            <option value="0">
+                                -
+                            </option>
+                            @if(count($categories))
+                                @foreach ($categories as $cat)
+                                    <option value="{{$cat->id}}"> {{$cat->title}}
+                                    </option>
+                                @endforeach
+                            @endif
+                        </select><br>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     {!! Form::close() !!}

@@ -19,7 +19,6 @@ class CreateIdownloadSuscriptorsTable extends Migration
             $table->string('email');
             $table->string('phone')->nullable();
             $table->string('comment')->nullable();
-            $table->string('slug')->nullable();
             $table->text('options')->default('')->nullable();
             $table->integer('download_id')->unsigned();
             $table->foreign('download_id')->references('id')->on('idownload__downloads')->onDelete('restrict');

@@ -31,7 +31,7 @@ class CategoryController extends AdminBaseController
      */
     public function index()
     {
-        $categories = $this->category->all();
+        $categories = $this->category->paginate(20);
         return view('idownload::admin.categories.index', compact('categories'));
     }
 
@@ -42,7 +42,8 @@ class CategoryController extends AdminBaseController
      */
     public function create()
     {
-        return view('idownload::admin.categories.create');
+      $categories = $this->category->all();
+        return view('idownload::admin.categories.create', compact('categories'));
     }
 
     /**
@@ -75,7 +76,8 @@ class CategoryController extends AdminBaseController
      */
     public function edit(Category $category)
     {
-        return view('idownload::admin.categories.edit', compact('category'));
+        $categories = $this->category->all();
+        return view('idownload::admin.categories.edit', compact('category', 'categories'));
     }
 
     /**
@@ -102,7 +104,6 @@ class CategoryController extends AdminBaseController
     public function destroy(Category $category)
     {
         $this->category->destroy($category);
-
         return redirect()->route('admin.idownload.category.index')
             ->withSuccess(trans('core::core.messages.resource deleted', ['name' => trans('idownload::categories.title.categories')]));
     }

@@ -19,20 +19,20 @@
             {!! $errors->first("{$lang}.slug", '<span class="help-block">:message</span>') !!}
         </div>
 
-        <div class='form-group{{ $errors->has("{$lang}.metatitle") ? ' has-error' : '' }}'>
-            {!! Form::label("{$lang}[metatitle]", trans('idownload::categories.form.meta_title')) !!}
-            {!! Form::text("{$lang}[metatitle]", old("{$lang}.metatitle"), ['class' => 'form-control',  'placeholder' => trans('idownload::categories.form.meta_title')]) !!}
-            {!! $errors->first("{$lang}.metatitle", '<span class="help-block">:message</span>') !!}
+        <div class='form-group{{ $errors->has("{$lang}.meta_title") ? ' has-error' : '' }}'>
+            {!! Form::label("{$lang}[meta_title]", trans('idownload::categories.form.meta_title')) !!}
+            {!! Form::text("{$lang}[meta_title]", old("{$lang}.meta_title"), ['class' => 'form-control',  'placeholder' => trans('idownload::categories.form.meta_title')]) !!}
+            {!! $errors->first("{$lang}.meta_title", '<span class="help-block">:message</span>') !!}
         </div>
 
-        <div class='form-group{{ $errors->has("{$lang}.metakeywords") ? ' has-error' : '' }}'>
-            {!! Form::label("{$lang}[metakeywords]", trans('idownload::categories.form.meta_keywords')) !!}
-            {!! Form::text("{$lang}[metakeywords]", old("{$lang}.metakeywords"), ['class' => 'form-control',  'placeholder' => trans('idownload::categories.form.meta_keywords')]) !!}
-            {!! $errors->first("{$lang}.metakeywords", '<span class="help-block">:message</span>') !!}
+        <div class='form-group{{ $errors->has("{$lang}.meta_keywords") ? ' has-error' : '' }}'>
+            {!! Form::label("{$lang}[meta_keywords]", trans('idownload::categories.form.meta_keywords')) !!}
+            {!! Form::text("{$lang}[meta_keywords]", old("{$lang}.meta_keywords"), ['class' => 'form-control',  'placeholder' => trans('idownload::categories.form.meta_keywords')]) !!}
+            {!! $errors->first("{$lang}.meta_keywords", '<span class="help-block">:message</span>') !!}
         </div>
 
-        @editor('metadescription', trans('idownload::categories.form.meta_description'),
-        old("{$lang}.metadescription"), $lang)
+        @editor('meta_description', trans('idownload::categories.form.meta_description'),
+        old("{$lang}.meta_description"), $lang)
 
     </p>
 </div>

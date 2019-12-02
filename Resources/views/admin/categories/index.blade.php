@@ -31,6 +31,7 @@
                             <tr>
                                 <th>{{ trans('idownload::categories.table.id') }}</th>
                                 <th>{{ trans('idownload::categories.table.title') }}</th>
+                                <th>{{ trans('idownload::categories.table.parent') }}</th>
                                 <th>{{ trans('idownload::categories.table.slug') }}</th>
                                 <th>{{ trans('core::core.table.created at') }}</th>
                                 <th data-sortable="false">{{ trans('core::core.table.actions') }}</th>
@@ -51,17 +52,17 @@
                                         {{ $category->title }}
                                     </a>
                                 </td>
+
                                 <td>
-                                    <a href="{{ route('admin.idownload.category.edit', [$category->id]) }}">
-                                        {{ $category->slug }}
-                                    </a>
+                                    {{ $category->parent ? $category->parent['title'] : '-'}}
                                 </td>
 
+                                <td>
+                                    {{ $category->slug }}
+                                </td>
 
                                 <td>
-                                    <a href="{{ route('admin.idownload.category.edit', [$category->id]) }}">
-                                        {{ $category->created_at }}
-                                    </a>
+                                    {{ $category->created_at }}
                                 </td>
                                 <td>
                                     <div class="btn-group">
@@ -77,6 +78,7 @@
                             <tr>
                                 <th>{{ trans('idownload::categories.table.id') }}</th>
                                 <th>{{ trans('idownload::categories.table.title') }}</th>
+                                <th>{{ trans('idownload::categories.table.parent') }}</th>
                                 <th>{{ trans('idownload::categories.table.slug') }}</th>
                                 <th>{{ trans('core::core.table.created at') }}</th>
                                 <th>{{ trans('core::core.table.actions') }}</th>
@@ -84,6 +86,18 @@
                             </tfoot>
                         </table>
                         <!-- /.box-body -->
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">
+
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            @if (isset($categories))
+                                {{$categories->links()}}
+                            @endif
+                        </div>
                     </div>
                 </div>
                 <!-- /.box -->

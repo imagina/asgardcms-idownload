@@ -1,7 +1,7 @@
 @php
     $form=$lead['form'];
     $data=$lead['lead'];
-    $mailContent = ['nombre' => $data->full_name];
+    $mailContent = ['nombre'=>$data->full_name];
     $search = [];
     $replace = [];
     foreach($mailContent as $index=>$value){

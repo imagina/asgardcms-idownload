@@ -13,14 +13,14 @@ class DownloadWasUpdated implements StoringMedia
      */
     public $data;
     /**
-     * @var Download
+     * @var Post
      */
-    public $download;
+    public $document;
 
-    public function __construct(Download $download, array $data)
+    public function __construct(Download $document, array $data)
     {
         $this->data = $data;
-        $this->download = $download;
+        $this->document = $document;
     }
 
     /**
@@ -29,7 +29,7 @@ class DownloadWasUpdated implements StoringMedia
      */
     public function getEntity()
     {
-        return $this->download;
+        return $this->document;
     }
 
     /**

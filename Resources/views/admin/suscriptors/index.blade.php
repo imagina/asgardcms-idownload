@@ -13,13 +13,6 @@
 @section('content')
     <div class="row">
         <div class="col-xs-12">
-            <div class="row">
-                <div class="btn-group pull-right" style="margin: 0 15px 15px 0;">
-                    <a href="{{ route('admin.idownload.suscriptor.create') }}" class="btn btn-primary btn-flat" style="padding: 4px 10px;">
-                        <i class="fa fa-pencil"></i> {{ trans('idownload::suscriptors.button.create suscriptor') }}
-                    </a>
-                </div>
-            </div>
             <div class="box box-primary">
                 <div class="box-header">
                 </div>
@@ -29,8 +22,15 @@
                         <table class="data-table table table-bordered table-hover">
                             <thead>
                             <tr>
+                                <th>{{ trans('idownload::suscriptors.table.id') }}</th>
+                                <th>{{ trans('idownload::suscriptors.table.download') }}</th>
+                                <th>{{ trans('idownload::suscriptors.table.fullName') }}</th>
+                                <th>{{ trans('idownload::suscriptors.table.email') }}</th>
+                                <th>{{ trans('idownload::suscriptors.table.phone') }}</th>
+                                <th>{{ trans('idownload::suscriptors.table.comment') }}</th>
+                                <th>{{ trans('idownload::suscriptors.table.download') }}</th>
                                 <th>{{ trans('core::core.table.created at') }}</th>
-                                <th data-sortable="false">{{ trans('core::core.table.actions') }}</th>
+
                             </tr>
                             </thead>
                             <tbody>
@@ -39,23 +39,53 @@
                             <tr>
                                 <td>
                                     <a href="{{ route('admin.idownload.suscriptor.edit', [$suscriptor->id]) }}">
-                                        {{ $suscriptor->created_at }}
+                                        {{ $suscriptor->id }}
                                     </a>
                                 </td>
+
                                 <td>
-                                    <div class="btn-group">
-                                        <a href="{{ route('admin.idownload.suscriptor.edit', [$suscriptor->id]) }}" class="btn btn-default btn-flat"><i class="fa fa-pencil"></i></a>
-                                        <button class="btn btn-danger btn-flat" data-toggle="modal" data-target="#modal-delete-confirmation" data-action-target="{{ route('admin.idownload.suscriptor.destroy', [$suscriptor->id]) }}"><i class="fa fa-trash"></i></button>
-                                    </div>
+                                    {{ $suscriptor->download->title }}  ({{ $suscriptor->download->id }})
                                 </td>
+
+                                <td>
+                                    {{ $suscriptor->full_name }}
+                                </td>
+
+                                <td>
+                                    {{ $suscriptor->email }}
+                                </td>
+
+                                <td>
+                                    {{ $suscriptor->phone }}
+                                </td>
+
+                                <td>
+                                    {{ $suscriptor->comment }}
+                                </td>
+
+                                <td>
+                                    {{ $suscriptor->created_at }}
+                                </td>
+
+                                <td>
+                                    {{ $suscriptor->created_at }}
+                                </td>
+
                             </tr>
                             <?php endforeach; ?>
                             <?php endif; ?>
                             </tbody>
                             <tfoot>
                             <tr>
+                                <th>{{ trans('idownload::suscriptors.table.id') }}</th>
+                                <th>{{ trans('idownload::suscriptors.table.download') }}</th>
+                                <th>{{ trans('idownload::suscriptors.table.fullName') }}</th>
+                                <th>{{ trans('idownload::suscriptors.table.email') }}</th>
+                                <th>{{ trans('idownload::suscriptors.table.phone') }}</th>
+                                <th>{{ trans('idownload::suscriptors.table.comment') }}</th>
+                                <th>{{ trans('idownload::suscriptors.table.download') }}</th>
                                 <th>{{ trans('core::core.table.created at') }}</th>
-                                <th>{{ trans('core::core.table.actions') }}</th>
+
                             </tr>
                             </tfoot>
                         </table>

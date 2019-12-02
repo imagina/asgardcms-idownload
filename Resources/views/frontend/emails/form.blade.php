@@ -10,6 +10,8 @@
       $replace[] = $value;
   }
 @endphp
+
+
 @section('content')
   <div id="contend-mail" class="p-3">
     <h1>{{ $form->title }}</h1>
