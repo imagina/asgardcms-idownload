@@ -57,9 +57,13 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{{ url($download->download_file->path) }}" target="_blank">
-                                        <i class="fa fa-file"></i>
-                                    </a>
+                                    @if($download->download_file)
+                                        <a href="{{ url($download->download_file->path) }}" target="_blank">
+                                            <i class="fa fa-file"></i>
+                                        </a>
+                                    @else
+                                        --
+                                    @endif
                                 </td>
                                 <td>
                                     <a href="{{ route('admin.idownload.download.edit', [$download->id]) }}">
