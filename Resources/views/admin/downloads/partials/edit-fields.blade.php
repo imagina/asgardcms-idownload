@@ -12,11 +12,9 @@
         {!! Form::text("{$lang}[slug]", old("{$lang}.slug",$old), ['class' => 'form-control slug', 'data-slug' => 'target', 'placeholder' => trans('idownload::downloads.form.slug')]) !!}
         {!! $errors->first("{$lang}.slug", '<span class="help-block">:message</span>') !!}
     </div>
+    <?php $old = $download->hasTranslation($lang) ? $download->translate($lang)->description : '' ?>
     <div class='form-group{{ $errors->has("{$lang}.description") ? ' has-error' : '' }}'>
-        {!! Form::label("{$lang}[description]", trans('idownload::downloads.form.description')) !!}
-        <?php $old = $download->hasTranslation($lang) ? $download->translate($lang)->description : '' ?>
-        {!! Form::textarea("{$lang}[description]", old("{$lang}.description",$old), ['class' => 'form-control', 'placeholder' => trans('idownload::downloads.form.description')]) !!}
-        {!! $errors->first("{$lang}.description", '<span class="help-block">:message</span>') !!}
+        @editor('description', trans('idownload::downloads.form.description'), old("$lang.description", $old), $lang)
     </div>
     </p>
 </div>

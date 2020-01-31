@@ -58,10 +58,10 @@ class PublicController extends BasePublicController
             'status' => 1
           ],
           'page' => $request->page ?? 1,
-          'take' => setting('idocg::docs-per-page'),
+          'take' => 12,
           'include' => [],
         ];
-        $filters['filter']['category'] = $category->id;
+        $filters['filter']['categories'] = $category->id;
         if ($request->search != null){
           $filters['filter']['search'] = $request->search;
         }
@@ -77,7 +77,7 @@ class PublicController extends BasePublicController
     {
 
       $tpl = "idownload::frontend.show";
-      $ttpl = "idonwload.show";
+      $ttpl = "idownload.show";
 
       $categories = $this->category->all();
 

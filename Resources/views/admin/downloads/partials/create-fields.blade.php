@@ -10,8 +10,7 @@
         {!! $errors->first("{$lang}.slug", '<span class="help-block">:message</span>') !!}
     </div>
     <div class='form-group{{ $errors->has("{$lang}.description") ? ' has-error' : '' }}'>
-        {!! Form::label("{$lang}[description]", trans('idownload::downloads.form.description')) !!}
-        {!! Form::textarea("{$lang}[description]", old("{$lang}.description"), ['class' => 'form-control', 'placeholder' => trans('idownload::downloads.form.description')]) !!}
-        {!! $errors->first("{$lang}.description", '<span class="help-block">:message</span>') !!}
+        @editor('description', trans('idownload::downloads.form.description'), old("{$lang}.description"), $lang)
     </div>
+
 </div>

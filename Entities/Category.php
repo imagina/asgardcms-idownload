@@ -4,10 +4,11 @@ namespace Modules\Idownload\Entities;
 
 use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Traits\NamespacedEntity;
 
 class Category extends Model
 {
-  use Translatable;
+  use Translatable,NamespacedEntity;
 
   protected $table = 'idownload__categories';
 
@@ -18,12 +19,11 @@ class Category extends Model
     'meta_title',
     'meta_description',
     'meta_keywords',
+    'translatable_options',
+    'category_id',
   ];
 
   protected $fillable = [
-    'title',
-    'description',
-    'slug',
     'parent_id',
     'options',
   ];
@@ -41,6 +41,11 @@ class Category extends Model
   public function downloads()
   {
     return $this->hasMany(Download::class);
+  }
+
+  public function getOptionsAttribute($value)
+  {
+    return json_decode($value);
   }
 
 }

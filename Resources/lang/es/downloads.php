@@ -32,6 +32,8 @@ return [
       'category' => 'Categoría',
       'file' => 'Archivo',
       'status' => 'Estado',
+        'mainImage'=>'Imagen Principal',
+        'gallery'=>'Galeria de Imàgenes'
     ],
     'messages' => [
       'search' => 'Buscar',

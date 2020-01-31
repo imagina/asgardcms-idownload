@@ -29,10 +29,37 @@ class EloquentDownloadRepository extends EloquentBaseRepository implements Downl
     if (isset($params->filter)) {
       $filter = $params->filter;//Short filter
 
-      if (isset($filter->category)) {
+        if (isset($filter->categories)) {
 
-        $query->where('category_id',$filter->category);
-      }
+            $categories = is_array($filter->categories) ? $filter->categories : [$filter->categories];
+            $query->whereIn('category_id', $categories);
+
+
+        }
+        if (isset($filter->users)) {
+            $users = is_array($filter->users) ? $filter->users : [$filter->users];
+            $query->whereIn('user_id', $users);
+        }
+
+        if (isset($filter->include)) {
+            $include = is_array($filter->include) ? $filter->include : [$filter->include];
+            $query->whereIn('id', $include);
+        }
+        if (isset($filter->exclude)) {
+            $exclude = is_array($filter->exclude) ? $filter->exclude : [$filter->exclude];
+            $query->whereNotIn('id', $exclude);
+        }
+
+        if (isset($filter->exclude_categories)) {
+            $exclude_categories = is_array($filter->exclude_categories) ? $filter->exclude_categories : [$filter->exclude_categories];
+            $query->whereNotIn('category_id', $exclude_categories);
+        }
+
+        if (isset($filter->exclude_users)) {
+            $exclude_users = is_array($filter->exclude_users) ? $filter->exclude_users: [$filter->exclude_users];
+            $query->whereNotIn('user_id', $exclude_users);
+        }
+
 
       if (isset($filter->search)) { //si hay que filtrar por rango de precio
         $criterion = $filter->search;
@@ -66,12 +93,14 @@ class EloquentDownloadRepository extends EloquentBaseRepository implements Downl
           $query->whereDate($date->field, '<=', $date->to);
       }
 
-      //Order by
-      if (isset($filter->order)) {
-        $orderByField = $filter->order->field ?? 'created_at';//Default field
-        $orderWay = $filter->order->way ?? 'desc';//Default way
-        $query->orderBy($orderByField, $orderWay);//Add order to query
-      }
+        //Order by
+        if (isset($filter->order)) {
+            $orderByField = $filter->order->field ?? 'created_at';//Default field
+            $orderWay = $filter->order->way ?? 'desc';//Default way
+            $query->orderBy($orderByField, $orderWay);//Add order to query
+        }else{
+            $query->orderBy('created_at', 'desc');
+        }
     }
 
     /*== FIELDS ==*/
@@ -189,64 +218,5 @@ class EloquentDownloadRepository extends EloquentBaseRepository implements Downl
     return $this->model->whereHas('translations',function($query) use($slug){
       $query->where('slug',$slug);
     })->first();
-  }
-
-  /**
-  * Standard Api Method
-  * @param $criteria
-  * @param $data
-  * @param bool $params
-  * @return bool
-  */
-  public function updateBy($criteria, $data, $params = false)
-  {
-    /*== initialize query ==*/
-    $query = $this->model->query();
-
-    /*== FILTER ==*/
-    if (isset($params->filter)) {
-      $filter = $params->filter;
-
-      //Update by field
-      if (isset($filter->field))
-        $field = $filter->field;
-    }
-
-    /*== REQUEST ==*/
-    $model = $query->where($field ?? 'id', $criteria)->first();
-
-    if ($model) {
-      event(new DownloadWasUpdated($model, $data));
-      $model->update((array)$data);
-    }
-
-  }
-
-  /**
-   * Standard Api Method
-   * @param $criteria
-   * @param bool $params
-   */
-  public function deleteBy($criteria, $params = false)
-  {
-    /*== initialize query ==*/
-    $query = $this->model->query();
-
-    /*== FILTER ==*/
-    if (isset($params->filter)) {
-      $filter = $params->filter;
-
-      if (isset($filter->field))//Where field
-        $field = $filter->field;
-    }
-
-    /*== REQUEST ==*/
-    $model = $query->where($field ?? 'id', $criteria)->first();
-    if ($model) {
-      event(new DownloadWasDeleted($model->id, get_class($model)));
-      $model->delete();
-
-    }
-
   }
 }

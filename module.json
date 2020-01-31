@@ -12,6 +12,8 @@
         "Modules\\Idownload\\Providers\\EventServiceProvider"
     ],
     "aliases": [],
-    "files": [],
+    "files": [
+        "helpers.php"
+    ],
     "requires": []
 }

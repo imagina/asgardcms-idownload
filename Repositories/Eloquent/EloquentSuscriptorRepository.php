@@ -172,47 +172,4 @@ class EloquentSuscriptorRepository extends EloquentBaseRepository implements Sus
     return $model->delete();
   }
 
-  public function updateBy($criteria, $data, $params = false)
-  {
-    /*== initialize query ==*/
-    $query = $this->model->query();
-
-    /*== FILTER ==*/
-    if (isset($params->filter)) {
-      $filter = $params->filter;
-
-      //Update by field
-      if (isset($filter->field))
-        $field = $filter->field;
-    }
-
-    /*== REQUEST ==*/
-    $model = $query->where($field ?? 'id', $criteria)->first();
-    $model ? $model->update((array)$data) : false;
-    event(new SuscriptorWasUpdated($model, $data));
-    return $model;
-  }
-
-  /**
-   * Standard Api Method
-   * @param $criteria
-   * @param bool $params
-   */
-  public function deleteBy($criteria, $params = false)
-  {
-    /*== initialize query ==*/
-    $query = $this->model->query();
-
-    /*== FILTER ==*/
-    if (isset($params->filter)) {
-      $filter = $params->filter;
-
-      if (isset($filter->field))//Where field
-        $field = $filter->field;
-    }
-    $model = $query->where($field ?? 'id', $criteria)->first();
-    event(new SuscriptorWasDeleted($model->id, get_class($model)));
-    $model ? $model->delete() : false;
-  }
-
 }
